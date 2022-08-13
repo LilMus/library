@@ -30,8 +30,7 @@ header > button {
 }
 header > button:hover {
   background-color: #d7daba;
-  transition-property: background-color;
-  transition-duration: 0.3s;
+  transition: background-color 0.3s;
 }
 
 main {
