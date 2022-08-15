@@ -2,8 +2,13 @@
 body,
 html {
   height: 100%;
+  width: 100%;
   margin: 0;
   font-family: "Roboto", sans-serif;
+}
+
+.blurred {
+  filter: blur(5px);
 }
 
 header {
@@ -101,4 +106,69 @@ main button {
 .unread:hover {
   background-color: #e64949;
   transition: background-color 0.3s;
+}
+
+.form-section {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  display: none;
+}
+
+form {
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  border-radius: 5px;
+  font-weight: 700;
+  width: clamp(250px, 300px, 30%);
+  background-color: rgba(59, 127, 137, 0.7);
+}
+form legend {
+  margin-top: 1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+.form-container > div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.form-container div:nth-child(4) {
+  flex-direction: row;
+}
+.form-container button {
+  margin-bottom: 30px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 2em;
+  border-radius: 5px;
+  border: transparent;
+  cursor: pointer;
+  background-color: #3b7f89;
+}
+.form-container button:hover {
+  background-color: #336e77;
+  transition: background-color 0.3s;
+}
+.form-container input:not([type=checkbox]) {
+  margin-top: 5px;
+  height: 20px;
+  border: transparent;
+  border-radius: 2px;
 }/*# sourceMappingURL=style.css.map */

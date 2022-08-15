@@ -1,6 +1,13 @@
+/* eslint-disable no-restricted-syntax */
 let myLibrary = [];
 const main = document.querySelector('main');
 const btnRead = document.querySelector('.btn-read');
+const addBook = document.querySelector('header > button');
+const formSection = document.querySelector('.form-section');
+const blurredElt = Array.from(
+  document.querySelectorAll('body > *:not(.form-section, script)')
+);
+let isFormDisplayed = false;
 
 function Book(_title, _author, _pages, _read) {
   this.title = _title;
@@ -32,6 +39,40 @@ const addCardToLibrary = () => {
           `;
   }
 };
+
+const blurElt = () => {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const blurredElts of blurredElt) {
+    blurredElts.classList.add('blurred');
+  }
+};
+
+const unblurElt = () => {
+  for (const blurredElts of blurredElt) {
+    blurredElts.classList.remove('blurred');
+  }
+};
+
+const displayForm = () => {
+  formSection.style.display = 'flex';
+  blurElt();
+  isFormDisplayed = true;
+};
+
+const hideForm = () => {
+  if (isFormDisplayed) {
+    formSection.style.display = 'none';
+    unblurElt();
+    isFormDisplayed = false;
+  }
+};
+
+addBook.addEventListener('click', displayForm);
+formSection.addEventListener('click', (event) => {
+  if (event.target === formSection) {
+    hideForm();
+  }
+});
 
 addBookToLibrary(book1);
 addCardToLibrary();
