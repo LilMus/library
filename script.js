@@ -1,7 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 let myLibrary = [];
 const main = document.querySelector('main');
-const btnRead = document.querySelector('.btn-read');
 const addBook = document.querySelector('header > button');
 const formSection = document.querySelector('.form-section');
 const form = document.querySelector('form');
@@ -27,12 +26,13 @@ const addBookToLibrary = (book) => myLibrary.push(book);
 const addCardToLibrary = () => {
   // eslint-disable-next-line no-restricted-syntax
   main.innerHTML = '';
+  let index = 0;
   for (const book of myLibrary) {
-    let status = 'unread';
+    let status = 'pending';
     if (book.read) {
       status = 'read';
     }
-    main.innerHTML += `<div class="card">
+    main.innerHTML += `<div class="card" index="${index}">
         <div class="card-container">
           <div class="card-top">
             <h2 class="title">${book.title}</h2>
@@ -46,7 +46,10 @@ const addCardToLibrary = () => {
         </div>
       </div>
           `;
+    index++;
   }
+  const btnRead = Array.from(document.querySelectorAll('.btn-read'));
+  btnRead.forEach((btn) => btn.addEventListener('click', reverseStatus));
 };
 
 const blurElt = () => {
@@ -86,6 +89,9 @@ formSection.addEventListener('click', (event) => {
 });
 
 formAddBookBtn.addEventListener('click', () => {
+  if (!bookAuthor || !bookPages.value || !bookTitle.value) {
+    return;
+  }
   const book = new Book(
     bookTitle.value,
     bookAuthor.value,
@@ -96,3 +102,13 @@ formAddBookBtn.addEventListener('click', () => {
   addCardToLibrary();
   hideForm();
 });
+
+const reverseStatus = (button) => {
+  if (button.target.className === 'btn-read read') {
+    button.target.className = 'btn-read pending';
+    button.target.textContent = 'pending';
+  } else {
+    button.target.className = 'btn-read read';
+    button.target.textContent = 'read';
+  }
+};

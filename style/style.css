@@ -100,10 +100,10 @@ main button {
   transition: background-color 0.3s;
 }
 
-.unread {
+.pending {
   background-color: #ec7676;
 }
-.unread:hover {
+.pending:hover {
   background-color: #e64949;
   transition: background-color 0.3s;
 }
