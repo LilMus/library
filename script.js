@@ -32,7 +32,7 @@ const addCardToLibrary = () => {
     if (book.read) {
       status = 'read';
     }
-    main.innerHTML += `<div class="card" index="${index}">
+    main.innerHTML += `<div class="card">
         <div class="card-container">
           <div class="card-top">
             <h2 class="title">${book.title}</h2>
@@ -41,7 +41,7 @@ const addCardToLibrary = () => {
           <div class="card-bottom">
             <p class="pages">${book.pages} pages</p>
             <button type="button" class="btn-read ${status}">${status}</button>
-            <button type="button" class="btn-remove">REMOVE</button>
+            <button type="button" class="btn-remove" index="${index}">REMOVE</button>
           </div>
         </div>
       </div>
@@ -50,6 +50,15 @@ const addCardToLibrary = () => {
   }
   const btnRead = Array.from(document.querySelectorAll('.btn-read'));
   btnRead.forEach((btn) => btn.addEventListener('click', reverseStatus));
+
+  const btnRemove = Array.from(document.querySelectorAll('.btn-remove'));
+  btnRemove.forEach((btn) =>
+    btn.addEventListener('click', (book) => {
+      const i = book.target.getAttribute('index');
+      myLibrary.splice(i, 1);
+      addCardToLibrary();
+    })
+  );
 };
 
 const blurElt = () => {
